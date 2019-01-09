@@ -10,11 +10,11 @@
         <meta content="CMS Admin - Login" name="description" />
         <meta content="CMS Admin - Login" name="author" />
 
-        <link rel="shortcut icon" href="{{ asset('admins/images/admin.png') }}" />
+        <link rel="shortcut icon" href="{{ asset('admins/images/sitk-small.png') }}" />
         <link rel="stylesheet" href="{{ asset('admins/plugins/bootstrap/css/bootstrap.min.css') }}"  media="screen">
         <link rel="stylesheet" href="{{ asset('admins/css/main.css') }}">
         <link rel="stylesheet" href="{{ asset('admins/css/main-responsive.css') }}">
-        <link rel="stylesheet" href="{{ asset('admins/css/skin.css') }}" id="skin_color">
+        <link rel="stylesheet" href="{{ asset('admins/css/theme_dark.css') }}" id="skin_color">
         <link rel="stylesheet" href="{{ asset('admins/plugins/iCheck/skins/all.css') }}">
         <link rel="stylesheet" href="{{ asset('admins/fonts/style.css') }}">
         <link rel="stylesheet" href="{{ asset('admins/plugins/font-awesome/css/font-awesome.min.css') }}">

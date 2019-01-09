@@ -6,7 +6,7 @@
         </div>
 
         <div class="box-login">
-            <h3>Login Pegawai</h3>  
+            <h3>Login Aplikasi</h3>  
             <p>Silahkan isi Email & Password anda.</p>
             <form class="form-login" action="{{ route('login.submit') }}" method="post">
                 {{ csrf_field() }}
@@ -30,7 +30,7 @@
                         </span>
                     </div>
                     <div class="form-actions"> 
-                        <a href="{{url('daftar')}}" class="btn btn-green btn-bricky pull-left">Registrasi <i class="icon-user"></i></a>
+                        <a href="{{url('daftar')}}" class="btn btn-warning pull-left">Registrasi <i class="icon-user"></i></a>
                         <button name="submit" type="submit" class="btn btn-bricky pull-right">
                             Login <i class="icon-circle-arrow-right"></i>
                         </button>

@@ -77,6 +77,7 @@ class DaftarController extends Controller
             $user->email = $request->email;
             $user->level = "pegawai";
             $user->status = true;
+            $user->pegawai_id = $pegawai->id;
             $user->password = bcrypt($request->password);
             $user->remember_token = str_random(100);
 

@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class Commond
 {
-    public function DataSetting($id){
-        $setting = DB::table('setting_web')->where('id', $id)->first();
+    public function cekRiwayat($id){
+        $cek = DB::table('riwayat_jabatan')->select(DB::raw('COUNT(pegawai_id) as jumlah'))->where('pegawai_id', $id)->where('status', "aktif")->first();
 
-        return $setting;
+        return $cek;
     }
 
     public function ParentKategori($id){

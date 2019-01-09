@@ -1,6 +1,6 @@
 @extends('_layouts.template')
 
-@section('title', 'Data Riwayat Kerja')
+@section('title', 'Detail Riwayat Kerja')
 
 @section('bread')
 <li class="active"><i class="icon-laptop"></i> Home</li>
@@ -11,12 +11,7 @@
 @endsection
 
 @section('main')
-	<style>
-		.disabled {
-			pointer-events: none;
-			cursor: default;
-		}
-	</style>	
+			
 	<div class="row">
 		<div class="col-sm-12">	
 			@include('_errors/pesan_error')				
@@ -24,15 +19,10 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-8">
-							<h4>Data Riwayat Kerja</h4>
+							<h4>Detail Riwayat Kerja : {{$pegawai->nama}}, NIP : {{$pegawai->nip}}</h4>
 						</div>
 						<div class="col-md-4">
-							@if (count($data) < 1)
-								<a class="btn btn-large btn-green item" href="#"  data-target="#tambah" data-toggle="modal"><i class="clip-plus-circle"></i> Tambah</a>
-							@else
-								<a class="btn btn-large btn-green item @if(cekRiwayat($data[0]->pegawai_id)) disabled @endif" href="#"  data-target="#tambah" data-toggle="modal"><i class="clip-plus-circle"></i> Tambah</a>
-							@endif
-							
+							<a class="btn btn-large btn-red item" href="{{ url('admin/pegawai') }}">Kembali</a>
 						</div>
 					</div>
 					<hr style="margin-top:0px">
@@ -48,7 +38,7 @@
 								<th>Satuan Kerja</th>			
 								<th>Lokasi</th>			
 								<th>Status</th>			
-								{{-- <th class="pilihan">Opsi</th> --}}
+								<th class="pilihan">Opsi</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -67,17 +57,18 @@
 									<td>{{$d->lokasi}}</td>
 									<td>{{$d->status}}</td>
 
-									{{-- <td>
-										<a data-original-title='Edit' class='btn btn-sm btn-blue tooltips' href='{{ url('riwayat-kerja/'. $d->id .'/edit')}}'>
+									<td>
+										
+										<a data-original-title='Edit' class='btn btn-sm btn-blue tooltips' href='{{ url('admin/riwayat-kerja/pegawai/'. $d->id .'/edit')}}'>
 											<i class='clip-pencil'></i>
 										</a>
 										
-										<form action="{{url('riwayat-kerja', $d->id)}}" method="post" style="display: inline-block;">
+										<form action="{{url('admin/riwayat-kerja/pegawai', $d->id)}}" method="post" style="display: inline-block;">
 											{{ csrf_field() }}	
 											<input type="hidden" name="_method" value="DELETE">
 											<button type="submit" data-original-title='Hapus' class="btn btn-red btn-sm tooltips" onclick='return konfirmasiHapus()'><i class="clip-remove"></i></button>
 										</form>
-									</td> --}}
+									</td>
 								</tr>
 							@endforeach
 
@@ -89,8 +80,8 @@
 		</div>		
 	</div>
 
-	<div class="modal fade modal-crud" id="tambah" tabindex="-1" role="dialog" aria-hidden="true">
-		<form action="{{url('riwayat-kerja')}}" method="post" enctype="multipart/form-data">
+	{{-- <div class="modal fade modal-crud" id="tambah" tabindex="-1" role="dialog" aria-hidden="true">
+		<form action="{{url('admin/riwayat-kerja')}}" method="post" enctype="multipart/form-data">
 			{{ csrf_field() }}
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -171,6 +162,6 @@
 				<input name="simpan" value="Simpan" type="submit" class="btn btn-green">
 			</div>
 		</form>
-	</div>
+	</div> --}}
 
 @endsection

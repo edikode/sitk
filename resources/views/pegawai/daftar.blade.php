@@ -66,12 +66,15 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class='form-group @if($errors->has('jenis_kelamin')) has-error @endif'>
-                                        <label class='control-label'>Jenis Kelamin</label> <br>
+                                        <label class='control-label'>Jenis Kelamin</label>
+                                        <br>
                                         <label class='radio-inline'>
-                                            <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="L" class="square-green" @if(count($errors) > 0 && old('jenis_kelamin') == "L") checked @endif> Laki-Laki
+                                            <input type='radio' name='jenis_kelamin' class='square-green' value='L' @if(old('jenis_kelamin') == 'L') checked @endif required>
+                                            Laki-laki
                                         </label>
                                         <label class='radio-inline'>
-                                            <input type="radio" name="jenis_kelamin" id="jenis_kelamin" value="P" class="square-green" @if(count($errors) > 0 && old('jenis_kelamin') == "P") checked @endif> Perempuan
+                                            <input type='radio' name='jenis_kelamin' class='square-green' value='P' @if(old('jenis_kelamin') == 'P') checked @endif required>
+                                            Perempuan
                                         </label>
 
                                         @if ($errors->has('jenis_kelamin'))
@@ -175,7 +178,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							{{ csrf_field() }}
-							<input name="simpan" value="Simpan" type="submit" class="btn btn-green fright">
+							<input name="simpan" value="Simpan" type="submit" class="btn btn-info">
 						</div>
 					</div>							
 				</form>

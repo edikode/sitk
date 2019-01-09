@@ -46,6 +46,16 @@ return [
             'provider' => 'users',
         ],
 
+        'pegawai' => [
+            'driver' => 'session',
+            'provider' => 'pegawai',
+        ],
+        
+        'api-pegawai' => [
+            'driver' => 'token',
+            'provider' => 'pegawai',
+        ],
+
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
@@ -90,6 +100,11 @@ return [
             'model' => App\Models\User::class,
         ],
 
+        'pegawai' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
+
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
@@ -124,6 +139,11 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+        ],
+        'pegawai' => [
+            'provider' => 'pegawai',
             'table' => 'password_resets',
             'expire' => 60,
         ],

@@ -1,21 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Pegawai;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Session;
-use Auth;
 
-use App\Models\Riwayat;
-use App\Models\LokasiKerja;
 use App\Models\Jabatan;
 
-class RiwayatJabatan extends Controller
+class JabatanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
     }
     /**
      * Display a listing of the resource.
@@ -24,11 +21,9 @@ class RiwayatJabatan extends Controller
      */
     public function index()
     {
-        $jabatan = Jabatan::all();
-        $lokasi = LokasiKerja::all();
-        $data = Riwayat::where('pegawai_id',Auth::user()->id)->get();
+        $data = Jabatan::all();
         
-        return view('pegawai/riwayat/home',compact('data','jabatan','lokasi'));
+        return view('admin/jabatan/home',compact('data'));
     }
 
     /**
@@ -38,7 +33,7 @@ class RiwayatJabatan extends Controller
      */
     public function create()
     {
-       
+        
     }
 
     /**
@@ -49,24 +44,16 @@ class RiwayatJabatan extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Riwayat;
+        $data = new Jabatan;
 
-        $data->nomor_sk = $request->nomor_sk;
-        $data->tanggal_sk = tgl_en($request->tanggal_sk);
-        $data->tanggal_mulai = tgl_en($request->tanggal_mulai);
-        $data->tanggal_selesai = tgl_en($request->tanggal_selesai);
-        $data->satuan_kerja = $request->satuan_kerja;
+        $data->nama = $request->nama;
         $data->unit_kerja = $request->unit_kerja;
-        $data->pegawai_id = $request->pegawai_id;
-        $data->lokasi_kerja_id = $request->lokasi_kerja_id;
-        $data->jabatan_id = $request->jabatan_id;
-        $data->pegawai_id = Auth::user()->id;
         
         $data->save();
 
-        Session::flash('pesan_sukses', 'Data Riwayat Jabatan Berhasil dimasukkan');
+        Session::flash('pesan_sukses', 'Data Jabatan Berhasil dimasukkan');
 
-        return redirect('tunjangan');
+        return redirect('admin/jabatan');
     }
 
     /**
@@ -88,8 +75,8 @@ class RiwayatJabatan extends Controller
      */
     public function edit($id)
     {
-        $data = Riwayat::findorfail($id);
-        return view('pegawai/tunjangan/update', compact('data'));
+        $data = Jabatan::findorfail($id);
+        return view('admin/jabatan/update', compact('data'));
     }
 
     /**
@@ -101,18 +88,16 @@ class RiwayatJabatan extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Riwayat::findorfail($id);
+        $data = Jabatan::findorfail($id);
 
         $data->nama = $request->nama;
-        $data->alamat = $request->alamat;
-        $data->tanggal_lahir = tgl_en($request->tanggal_lahir);
-        $data->status = $request->status;
+        $data->unit_kerja = $request->unit_kerja;
         
         $data->save();
 
-        Session::flash('pesan_sukses', 'Data Tunjangan berhasil di perbarui');
+        Session::flash('pesan_sukses', 'Data Jabatan berhasil di perbarui');
 
-        return redirect('tunjangan/'.$data->id.'/edit');
+        return redirect('admin/jabatan/'.$data->id.'/edit');
     }
 
     /**
@@ -123,12 +108,12 @@ class RiwayatJabatan extends Controller
      */
     public function destroy($id)
     {
-        $data = Riwayat::findorfail($id);
+        $data = Jabatan::findorfail($id);
 
         $data->delete();
-        Session::flash('pesan_sukses', 'Data Tunjangan Berhasil Dihapus');
+        Session::flash('pesan_sukses', 'Data Jabatan Berhasil Dihapus');
         
-        return redirect('tunjangan');
+        return redirect('admin/jabatan');
     }
 
 }

@@ -709,17 +709,17 @@ li.dropdown.current-user .dropdown-menu li a {
 	color: #ffffff;
 }
 .btn-green {
-	background-color: #024e3f;
+	background-color: #272727;
 	border-color: #327b00;
 	color: #ffffff;
 }
 .btn-green:hover, .btn-green:focus, .btn-green:active, .btn-green.active {
-	background-color: #024e3f;
+	background-color: #272727;
 	border-color: #327b00;
 	color: #ffffff;
 }
 .btn-green.disabled:hover, .btn-green.disabled:focus, .btn-green.disabled:active, .btn-green.disabled.active, .btn-green[disabled]:hover, .btn-green[disabled]:focus, .btn-green[disabled]:active, .btn-green[disabled].active, fieldset[disabled] .btn-green:hover, fieldset[disabled] .btn-green:focus, fieldset[disabled] .btn-green:active, fieldset[disabled] .btn-green.active {
-	background-color: #024e3f;
+	background-color: #272727;
 	border-color: #327b00;
 	color: #ffffff;
 }
@@ -1899,7 +1899,7 @@ span.star:before {
 	color: rgba(0, 0, 0, 0.4) !important;
 }
 .tab-padding.tab-blue > li > a, .tab-padding.tab-blue > li > a:focus {
-	background-color: #024e3f;
+	background-color: #272727;
 }
 
 .tab-padding.tab-blue > li.active > a, .tab-padding.tab-blue > li.active > a:focus, .tab-padding.tab-blue > li.active > a:hover {
@@ -1908,7 +1908,7 @@ span.star:before {
 	color: #333333;
 }
 .tab-padding.tab-blue > li.active > a, .tab-padding.tab-blue > li.active > a:focus, .tab-padding.tab-teal > li.active > a:hover {
-	border-color: #024e3f #DDDDDD transparent;
+	border-color: #272727 #DDDDDD transparent;
 	color: #333333;
 }
 .tabs-below .tab-padding.tab-blue > li.active > a {
@@ -1997,7 +1997,7 @@ span.star:before {
 	letter-spacing: -1px;
 	margin: 0 0 15px;
 	padding: 0;
-	color: #024e3f;
+	color: #272727;
 }
 
 .page-header h1 small {
@@ -2726,7 +2726,7 @@ td.center .dropdown-menu {
  /* ---------------------------------------------------------------------- */
 body.login {
 	color: #7F7F7F;
-	background-color: #024e3f;
+	background-color: #272727;
 }
 body.login.example1 {
 	background-image: url("../images/bg.png");

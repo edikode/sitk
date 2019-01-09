@@ -1,6 +1,6 @@
 @extends('_layouts.template')
 
-@section('title', 'Data Tunjangan')
+@section('title', 'Data Lokasi Kerja')
 
 @section('bread')
 <li class="active"><i class="icon-laptop"></i> Home</li>
@@ -19,7 +19,7 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-8">
-							<h4>Data Tunjangan</h4>
+							<h4>Data Lokasi Kerja</h4>
 						</div>
 						<div class="col-md-4">
 							<a class="btn btn-large btn-green item" href="#"  data-target="#tambah" data-toggle="modal"><i class="clip-plus-circle"></i> Tambah</a>
@@ -30,10 +30,8 @@
 						<thead>
 							<tr>			
 								<th class="no">No</th>
-								<th>Nama</th>
-								<th>Tanggal Lahir</th>
-								<th>Alamat</th>				
-								<th>Status</th>			
+								<th>Nama Lokasi</th>
+								<th>Alamat</th>
 								<th class="pilihan">Opsi</th>
 							</tr>
 						</thead>
@@ -45,20 +43,14 @@
 								<tr>
 									<td align="center">{{$i++}}</td>
 									<td>{{$d->nama}}</td>
-									<td>{{tgl_id($d->tanggal_lahir)}}</td>
 									<td>{{$d->alamat}}</td>
-									<td>{{$d->status}}</td>
-									
-									<td>
-										{{-- <a data-original-title='Detail' class='btn btn-green btn-sm tooltips' href='{{ url('tunjangan/'. $d->id)}}'>
-											<i class='clip-eye'></i>
-										</a> --}}
 
-										<a data-original-title='Edit' class='btn btn-sm btn-blue tooltips' href='{{ url('tunjangan/'. $d->id .'/edit')}}'>
+									<td>
+										<a data-original-title='Edit' class='btn btn-sm btn-blue tooltips' href='{{ url('admin/lokasi/'. $d->id .'/edit')}}'>
 											<i class='clip-pencil'></i>
 										</a>
 										
-										<form action="{{url('tunjangan', $d->id)}}" method="post" style="display: inline-block;">
+										<form action="{{url('admin/lokasi', $d->id)}}" method="post" style="display: inline-block;">
 											{{ csrf_field() }}	
 											<input type="hidden" name="_method" value="DELETE">
 											<button type="submit" data-original-title='Hapus' class="btn btn-red btn-sm tooltips" onclick='return konfirmasiHapus()'><i class="clip-remove"></i></button>
@@ -70,17 +62,16 @@
 						</tbody>
 					</table>
 				</div>
-				
 			</div>
 		</div>		
 	</div>
 
 	<div class="modal fade modal-crud" id="tambah" tabindex="-1" role="dialog" aria-hidden="true">
-		<form action="{{url('tunjangan')}}" method="post" enctype="multipart/form-data">
+		<form action="{{url('admin/lokasi')}}" method="post" enctype="multipart/form-data">
 			{{ csrf_field() }}
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Tambah Tunjangan</h4>
+				<h4 class="modal-title">Tambah Lokasi Kerja</h4>
 			</div>		
 			<div class="modal-body">
 				<div class="row">
@@ -94,27 +85,6 @@
 								<span for="nama" class="help-block">{{ $errors->first('nama') }}</span>
 							@endif
 						</div>	
-						<div class='form-group @if($errors->has('status')) has-error @endif'>
-							<label class='control-label'>Status Hubungan dlm Keluarga</label>
-							<select name="status" id="status" class="form-control" required>
-								<option value="">--- Pilih ---</option>
-								<option value="Istri" @if(count($errors) > 0) @if($errors->first('status') == "Istri") selected @endif @endif>Istri</option>
-								<option value="Anak ke 1" @if(count($errors) > 0) @if($errors->first('status') == "Anak ke 1") selected @endif @endif>Anak ke 1</option>
-								<option value="Anak ke 2" @if(count($errors) > 0) @if($errors->first('status') == "Anak ke 2") selected @endif @endif>Anak ke 2</option>
-								<option value="Anak ke 3" @if(count($errors) > 0) @if($errors->first('status') == "Anak ke 3") selected @endif @endif>Anak ke 3</option>
-							</select>
-
-							@if ($errors->has('status'))
-								<span for="status" class="help-block">{{ $errors->first('status') }}</span>
-							@endif
-						</div>
-						<div class='form-group @if($errors->has('tanggal_lahir')) has-error @endif'>
-							<label class='control-label'>Tanggal Lahir</label>
-							<div class="input-group">
-								<input type="text" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker" name="tanggal_lahir" value="@if(count($errors) > 0){{old('tanggal_lahir')}}@endif" required>
-								<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
-							</div>
-						</div>
 						<div class='form-group'>
 							<label class='control-label'>Alamat</label>
 							<textarea class='form-control limited' id='alamat' cols='10' rows='4' name='alamat' style='height:75px; resize:none;' maxlength='160'>@if(count($errors) > 0){{old('alamat')}}@endif</textarea>

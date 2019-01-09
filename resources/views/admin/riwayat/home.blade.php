@@ -11,12 +11,7 @@
 @endsection
 
 @section('main')
-	<style>
-		.disabled {
-			pointer-events: none;
-			cursor: default;
-		}
-	</style>	
+			
 	<div class="row">
 		<div class="col-sm-12">	
 			@include('_errors/pesan_error')				
@@ -24,14 +19,50 @@
 				<div class="panel-body">
 					<div class="row">
 						<div class="col-md-8">
-							<h4>Data Riwayat Kerja</h4>
+							<div class="row">
+								<form action="{{url('admin/riwayat-kerja/cari')}}" method="post">
+									{{ csrf_field() }}
+									<div class="col-md-3">
+										<div class="form-group">
+											<!-- panggil fungsi tahun -->
+											<label class="control-label">Pilih Bulan</label>
+											<select name="bulan" id="bulan" class="form-control search-select" required>
+												<option value="">-- Pilih --</option>
+												<option value="semua" @if($bulan == "semua")selected @else @endif>Semua</option>
+												<option value="1" @if($bulan == 1)selected @else @endif>Januari</option>
+												<option value="2"  @if($bulan == 2)selected @else @endif>Februari</option>
+												<option value="3"  @if($bulan == 3)selected @else @endif>Maret</option>
+												<option value="4"  @if($bulan == 4)selected @else @endif>April</option>
+												<option value="5"  @if($bulan == 5)selected @else @endif>Mei</option>
+												<option value="6"  @if($bulan == 6)selected @else @endif>Juni</option>
+												<option value="7"  @if($bulan == 7)selected @else @endif>Juli</option>
+												<option value="8"  @if($bulan == 8)selected @else @endif>Agustus</option>
+												<option value="9"  @if($bulan == 9)selected @else @endif>September</option>
+												<option value="10"  @if($bulan == 10)selected @else @endif>Oktober</option>
+												<option value="11"  @if($bulan == 11)selected @else @endif>November</option>
+												<option value="12"  @if($bulan == 12)selected @else @endif>Desember</option>
+											</select>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<label class="control-label">Pilih Tahun</label>
+											<select name="tahun" id="tahun" class="form-control search-select" required>
+												<option value="">-- Pilih --</option>
+												@for ($i = 2018; $i < date('Y')+3; $i++)
+													<option value="{{$i}}" @if($tahun == $i)selected @else @endif>{{$i}}</option>
+												@endfor
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<button type="submit" class="btn btn-success" style="margin-top: 25px;">Tampilkan</button>
+										<a class="btn btn-large btn-warning" href="{{url('admin/riwayat-kerja/cetak/'.$bulan.'/'.$tahun)}}" style="margin-left:10px;margin-top:25px;" target="_blank"><i class="clip-file-pdf"></i> Cetak</a>
+									</div>
+								</form>
+							</div>
 						</div>
 						<div class="col-md-4">
-							@if (count($data) < 1)
-								<a class="btn btn-large btn-green item" href="#"  data-target="#tambah" data-toggle="modal"><i class="clip-plus-circle"></i> Tambah</a>
-							@else
-								<a class="btn btn-large btn-green item @if(cekRiwayat($data[0]->pegawai_id)) disabled @endif" href="#"  data-target="#tambah" data-toggle="modal"><i class="clip-plus-circle"></i> Tambah</a>
-							@endif
 							
 						</div>
 					</div>
@@ -40,6 +71,8 @@
 						<thead>
 							<tr>			
 								<th class="no">No</th>
+								<th>NIP</th>
+								<th>Nama</th>
 								<th>Nomor SK</th>
 								<th>Tanggal SK</th>
 								<th>Jabatan</th>
@@ -48,7 +81,7 @@
 								<th>Satuan Kerja</th>			
 								<th>Lokasi</th>			
 								<th>Status</th>			
-								{{-- <th class="pilihan">Opsi</th> --}}
+								<th class="pilihan">Opsi</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -58,26 +91,29 @@
 							@foreach ($data as $d)
 								<tr>
 									<td align="center">{{$i++}}</td>
+									<td>{{$d->nip}}</td>
+									<td>{{$d->nama_pegawai}}</td>
 									<td>{{$d->nomor_sk}}</td>
 									<td>{{tgl_id($d->tanggal_sk)}}</td>
-									<td>{{$d->jabatan}}</td>
+									<td>{{$d->nama_jabatan}}</td>
 									<td>{{tgl_id($d->tanggal_mulai)}}</td>
 									<td>{{tgl_id($d->tanggal_selesai)}}</td>
 									<td>{{$d->satuan_kerja}}</td>
-									<td>{{$d->lokasi}}</td>
+									<td>{{$d->nama_lokasi}}</td>
 									<td>{{$d->status}}</td>
 
-									{{-- <td>
-										<a data-original-title='Edit' class='btn btn-sm btn-blue tooltips' href='{{ url('riwayat-kerja/'. $d->id .'/edit')}}'>
+									<td>
+										
+										<a data-original-title='Edit' class='btn btn-sm btn-blue tooltips' href='{{ url('admin/riwayat-kerja/'. $d->id .'/edit')}}'>
 											<i class='clip-pencil'></i>
 										</a>
 										
-										<form action="{{url('riwayat-kerja', $d->id)}}" method="post" style="display: inline-block;">
+										<form action="{{url('admin/riwayat-kerja', $d->id)}}" method="post" style="display: inline-block;">
 											{{ csrf_field() }}	
 											<input type="hidden" name="_method" value="DELETE">
 											<button type="submit" data-original-title='Hapus' class="btn btn-red btn-sm tooltips" onclick='return konfirmasiHapus()'><i class="clip-remove"></i></button>
 										</form>
-									</td> --}}
+									</td>
 								</tr>
 							@endforeach
 
@@ -90,7 +126,7 @@
 	</div>
 
 	<div class="modal fade modal-crud" id="tambah" tabindex="-1" role="dialog" aria-hidden="true">
-		<form action="{{url('riwayat-kerja')}}" method="post" enctype="multipart/form-data">
+		<form action="{{url('admin/riwayat-kerja')}}" method="post" enctype="multipart/form-data">
 			{{ csrf_field() }}
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>

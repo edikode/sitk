@@ -2,11 +2,10 @@
 
 use App\Library\Commond;
 
-//untuk menu backend
-function DataSetting($id){
-	$setting = new Commond();
-	$data = $setting->DataSetting($id);
-	return $data;
+function cekRiwayat($pegawai_id){
+	$cek = new Commond();
+	$data = $cek->cekRiwayat($pegawai_id);
+	return $data->jumlah;
 }
 
 //parent kategori

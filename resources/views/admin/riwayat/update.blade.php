@@ -7,7 +7,7 @@
 @endsection
 
 @section('button')
-	<a class="btn btn-large btn-red item" href="{{ url('riwayat-kerja') }}">Kembali</a>
+	<a class="btn btn-large btn-red item" href="{{ url('admin/riwayat-kerja') }}">Kembali</a>
 @endsection
 
 @section('main')
@@ -16,7 +16,7 @@
 		<div class="col-sm-12">				
 			<div class="panel panel-default">
 				<div class="panel-body">	
-					<form action="{{ url('riwayat-kerja/'.$data->id) }}" method="post" enctype="multipart/form-data">			
+					<form action="{{ url('admin/riwayat-kerja/'.$data->id) }}" method="post" enctype="multipart/form-data">			
 						<div class="row">
 							<div class="col-md-12">
 								@include('_errors/pesan_error')	

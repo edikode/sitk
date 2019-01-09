@@ -1,19 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\Pegawai;
+namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use Session;
-use Auth;
 
-use App\Models\Tunjangan;
+use App\Models\Lokasi;
 
-class TunjanganController extends Controller
+class LokasiController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:admin');
     }
     /**
      * Display a listing of the resource.
@@ -22,9 +21,9 @@ class TunjanganController extends Controller
      */
     public function index()
     {
-        $data = Tunjangan::where('pegawai_id',Auth::user()->id)->get();
+        $data = Lokasi::all();
         
-        return view('pegawai/tunjangan/home',compact('data'));
+        return view('admin/lokasi/home',compact('data'));
     }
 
     /**
@@ -34,8 +33,7 @@ class TunjanganController extends Controller
      */
     public function create()
     {
-        $pegawai_id = Auth::user()->id;
-        return view('pegawai/pendidikan/create',compact('pegawai_id'));
+        
     }
 
     /**
@@ -46,19 +44,16 @@ class TunjanganController extends Controller
      */
     public function store(Request $request)
     {
-        $data = new Tunjangan;
+        $data = new Lokasi;
 
         $data->nama = $request->nama;
         $data->alamat = $request->alamat;
-        $data->tanggal_lahir = tgl_en($request->tanggal_lahir);
-        $data->status = $request->status;
-        $data->pegawai_id = Auth::user()->id;
         
         $data->save();
 
-        Session::flash('pesan_sukses', 'Data Tunjangan Berhasil dimasukkan');
+        Session::flash('pesan_sukses', 'Data Lokasi Kerja Berhasil dimasukkan');
 
-        return redirect('tunjangan');
+        return redirect('admin/lokasi');
     }
 
     /**
@@ -80,8 +75,8 @@ class TunjanganController extends Controller
      */
     public function edit($id)
     {
-        $data = Tunjangan::findorfail($id);
-        return view('pegawai/tunjangan/update', compact('data'));
+        $data = Lokasi::findorfail($id);
+        return view('admin/lokasi/update', compact('data'));
     }
 
     /**
@@ -93,18 +88,16 @@ class TunjanganController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = Tunjangan::findorfail($id);
+        $data = Lokasi::findorfail($id);
 
         $data->nama = $request->nama;
         $data->alamat = $request->alamat;
-        $data->tanggal_lahir = tgl_en($request->tanggal_lahir);
-        $data->status = $request->status;
         
         $data->save();
 
-        Session::flash('pesan_sukses', 'Data Tunjangan berhasil di perbarui');
+        Session::flash('pesan_sukses', 'Data Lokasi Kerja berhasil di perbarui');
 
-        return redirect('tunjangan/'.$data->id.'/edit');
+        return redirect('admin/lokasi/'.$data->id.'/edit');
     }
 
     /**
@@ -115,12 +108,12 @@ class TunjanganController extends Controller
      */
     public function destroy($id)
     {
-        $data = Tunjangan::findorfail($id);
+        $data = Lokasi::findorfail($id);
 
         $data->delete();
-        Session::flash('pesan_sukses', 'Data Tunjangan Berhasil Dihapus');
+        Session::flash('pesan_sukses', 'Data Lokasi Kerja Berhasil Dihapus');
         
-        return redirect('tunjangan');
+        return redirect('admin/lokasi');
     }
 
 }

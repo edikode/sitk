@@ -9,28 +9,24 @@
   <meta content="CMS Admin" name="description" />
   <meta content="CMS Admin" name="author" />
   
-  <link rel="shortcut icon" href="{{ asset('admins/images/admin.png') }}" />
+  <link rel="shortcut icon" href="{{ asset('admins/images/sitk-small.png') }}" />
   <link rel="stylesheet" href="{{ asset('admins/plugins/font-awesome/css/font-awesome.min.css') }}">
   <link rel="stylesheet" href="{{ asset('admins/plugins/bootstrap/css/bootstrap.min.css') }}"  media="screen">
   <link rel="stylesheet" href="{{ asset('admins/css/main.css') }}">
   <link rel="stylesheet" href="{{ asset('admins/css/main-responsive.css') }}">
+  
   <link rel="stylesheet" href="{{ asset('admins/plugins/iCheck/skins/all.css') }}">
   <link rel="stylesheet" href="{{ asset('admins/fonts/style.css') }}">
-  <!-- UNTUK FORM -->
-  <link rel="stylesheet" href="{{ asset('admins/plugins/jQuery-Tags-Input/jquery.tagsinput.css') }}">
   <link rel="stylesheet" href="{{ asset('admins/plugins/select2/select2.css') }}">
-  <link rel="stylesheet" href="{{ asset('admins/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css') }}"> 
-  <!-- UNTUK TABEL DATA -->   
-  <link rel="stylesheet" href="{{ asset('admins/plugins/DataTables/media/css/DT_bootstrap.css') }}" />
-  {{-- untuk upload gambar banyak --}}
-  <link rel="stylesheet" type="text/css" href="{{ asset('admins/css/dropzone.css') }}">
-  {{-- social button untuk profil --}}
-  <link rel="stylesheet" href="{{ asset('admins/plugins/bootstrap-social-buttons/social-buttons-3.css') }}">
+  <link rel="stylesheet" href="{{ asset('admins/plugins/jQuery-Tags-Input/jquery.tagsinput.css') }}">
+  <link rel="stylesheet" href="{{ asset('admins/plugins/datepicker/css/datepicker.css') }}">
 
+  <link rel="stylesheet" href="{{ asset('admins/plugins/bootstrap-fileupload/bootstrap-fileupload.min.css') }}">      
+  
   <link href="{{ asset('admins/plugins/bootstrap-modal/css/bootstrap-modal-bs3patch.css') }}" rel="stylesheet" type="text/css"/>
   <link href="{{ asset('admins/plugins/bootstrap-modal/css/bootstrap-modal.css') }}" rel="stylesheet" type="text/css"/>
 
-  <link rel="stylesheet" href="{{ asset('admins/css/skin.css') }}" id="skin_color">
+  <link rel="stylesheet" href="{{ asset('admins/css/theme_dark.css') }}" id="skin_color">
 
   <style>
       .date-picker {

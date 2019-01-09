@@ -13,7 +13,7 @@ class PendidikanController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth:pegawai');
     }
     /**
      * Display a listing of the resource.
@@ -22,7 +22,7 @@ class PendidikanController extends Controller
      */
     public function index()
     {
-        $data = Pendidikan::where('pegawai_id',Auth::user()->id)->first();
+        $data = Pendidikan::where('pegawai_id',Auth::user()->pegawai_id)->first();
         if(!$data){
             return redirect('pendidikan-terakhir/create');
         }
@@ -36,7 +36,7 @@ class PendidikanController extends Controller
      */
     public function create()
     {
-        $pegawai_id = Auth::user()->id;
+        $pegawai_id = Auth::user()->pegawai_id;
         return view('pegawai/pendidikan/create',compact('pegawai_id'));
     }
 

@@ -32,7 +32,7 @@
 					</tr>
 					<tr>
 						<td>Tahun Lulus</td>
-						<td>{{$data->tahun_lulus}}</td>
+						<td>{{tgl_id($data->tahun_lulus)}}</td>
 					</tr>
 				</tbody>
 			</table>

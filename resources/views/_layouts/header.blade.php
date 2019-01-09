@@ -26,29 +26,15 @@
 						<i class="clip-chevron-down"></i>
 					</a>
 					<ul class="dropdown-menu">
-						
-						<?php
-						if (Auth::user()->level == "superuser") {
-							$link = "superuser/logout";
-
-						} else if (Auth::user()->level == "admin") {
-							$link = "admin/logout";
-
-						} else {
-							$link = "logout";
-						}
-						?>
 						<li>
-							<a href="{{ url($link) }}"
-                                onclick="event.preventDefault();
-                                         document.getElementById('logout-form').submit();">
+							<a href="{{ url('logout') }}">
                                 <i class="clip-exit"></i>
 								&nbsp;Log Out
                             </a>
 
-                            <form id="logout-form" action="{{ url($link) }}" method="POST" style="display: none;">
+                            {{-- <form id="logout-form" action="{{ url($link) }}" method="POST" style="display: none;">
                                 {{ csrf_field() }}
-                            </form>
+                            </form> --}}
 						</li>
 					</ul>
 				</li>
