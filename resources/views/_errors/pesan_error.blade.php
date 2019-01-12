@@ -6,4 +6,8 @@
 	<div class='successHandler alert alert-success display'>
 		<i class='icon-ok'></i> {{ Session::get('pesan_sukses')}}
 	</div>
+@elseif(Session::has('pesan_error'))
+	<div class='successHandler alert alert-danger display'>
+		<i class='glyphicon glyphicon-remove'></i> {{ Session::get('pesan_error')}}
+	</div>
 @endif

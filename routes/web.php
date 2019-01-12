@@ -19,6 +19,7 @@ Route::resource('riwayat-kerja', 'Pegawai\RiwayatController');
 Route::group(['prefix' => 'admin'], function () 
 {
     Route::get('/home', 'Admin\HomeController@index')->name('admin.home');
+    Route::get('/home/konfirmasi/{id}', 'Admin\HomeController@konfirmasi');
     
     Route::resource('riwayat-kerja', 'Admin\RiwayatController');
     Route::get('riwayat-kerja/cari', 'Admin\RiwayatController@pencarian');

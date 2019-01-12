@@ -52,7 +52,6 @@ class DaftarController extends Controller
             'password'  => 'required|min:6|same:konfirmasipassword',
         ]);
 
-        // dd($request);
 
         $pegawai->nip = $request->nip;
         $pegawai->nama = $request->nama;
@@ -66,24 +65,21 @@ class DaftarController extends Controller
         $pegawai->email = $request->email;
         $pegawai->status = "aktif";
 
-        if($request->hasFile('gambar')) {
-            $pegawai->gambar = $this->UploadGambar($request, $pegawai->nama);
-        }
-
+        
         // dd($request);
         if($pegawai->save()){
             $user = new User;
             $user->name = $request->nama;
             $user->email = $request->email;
             $user->level = "pegawai";
-            $user->status = true;
+            $user->status = false;
             $user->pegawai_id = $pegawai->id;
             $user->password = bcrypt($request->password);
             $user->remember_token = str_random(100);
 
             $user->save();
 
-            Session::flash('pesan_sukses', 'Data Pegawai berhasil di tambah, Login untuk melengkapi');
+            Session::flash('pesan_sukses', 'Data Pegawai berhasil di tambah, User anda akan aktif ketika sudah melewati konfirmasi dari admin');
         } else {
             dd("error");
         }

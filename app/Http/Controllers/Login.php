@@ -18,7 +18,7 @@ class Login extends Controller
 
     function masuk(Request $request){
         
-        $data = Pengguna::where('email',$request->email)->first();
+        $data = Pengguna::where('email',$request->email)->where('status',1)->first();
 
         if($data){
             if (Hash::check($request->password, $data->password)) {
@@ -45,7 +45,7 @@ class Login extends Controller
                 return redirect('login');
             }
         } else {
-            Session::flash('pesan_error', 'Terjadi Kesalahan Pada Inputan !!');
+            Session::flash('pesan_error', 'Tidak Terdaftar pada sistem, Masukkan Email dan Password dengan benar !!');
             return redirect('login');
         }
         
