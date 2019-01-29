@@ -129,17 +129,6 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class='form-group @if($errors->has('email')) has-error @endif'>
-                                        <label class='control-label'>Email</label>
-                                        <input type='text' placeholder='Email' class='form-control limited' id='email' name='email' maxlength='45' value='@if(count($errors) > 0){{old('email')}}@endif'
-                                        required>
-
-                                        @if ($errors->has('email'))
-                                            <span for="email" class="help-block">{{ $errors->first('email') }}</span>
-                                        @endif
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
                                     <div class='form-group @if($errors->has('telepon')) has-error @endif'>
                                         <label class='control-label'>Telepon</label>
                                         <input type='text' placeholder='Telepon' class='form-control limited' id='telepon' name='telepon' maxlength='15' value='@if(count($errors) > 0){{old('telepon')}}@endif'

@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Session;
 
 use App\Models\Pegawai;
+use App\Models\Riwayat;
+use App\Models\Pendidikan;
+use App\Models\User;
 
 class PegawaiController extends Controller
 {
@@ -126,10 +129,43 @@ class PegawaiController extends Controller
     {
         $data = Pegawai::findorfail($id);
 
-        $data->delete();
-        Session::flash('pesan_sukses', 'Data Jabatan Berhasil Dihapus');
+        if($data){
+
+            $pendidikan = Pendidikan::where('pegawai_id',$data->id)->first();
+            if($pendidikan){
+                if($pendidikan->file != ""){
+                    if(file_exists(public_path('upload/pendidikan/').$pendidikan->file)) {
+                        unlink(public_path('upload/pendidikan/').$pendidikan->file);
+                    }
+                }
+                $pendidikan->delete();
+            }
+
+            $riwayat = Riwayat::where('pegawai_id',$data->id)->get();
+            if($riwayat){
+                foreach($riwayat as $r){
+                    $datariwayat = Riwayat::findorfail($r->id);
+                    if($datariwayat->file != ""){
+                        if(file_exists(public_path('upload/riwayat/').$datariwayat->file)) {
+                            unlink(public_path('upload/riwayat/').$datariwayat->file);
+                        }
+                    }
+                    $datariwayat->delete();
+                }
+            }
+
+            $user = User::where('pegawai_id',$data->id)->first();
+            if($user){
+                $user->delete();
+            }
+
+            $data->delete();
+
+            Session::flash('pesan_sukses', 'Data Jabatan Berhasil Dihapus');
         
-        return redirect('admin/pegawai');
+            return redirect('admin/pegawai');
+        }
+        
     }
 
 }

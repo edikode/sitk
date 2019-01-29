@@ -41,12 +41,22 @@
 										<span for="kota" class="help-block">{{ $errors->first('kota') }}</span>
 									@endif
 								</div>
-								<div class='form-group @if($errors->has('tanggal_lulus')) has-error @endif'>
+								<div class='form-group @if($errors->has('tahun_lulus')) has-error @endif'>
 									<label class='control-label'>Tanggal Lulus</label>
 									<div class="input-group">
-										<input type="text" name="tahun_lulus" required autocomplete="off" placeholder="Tanggal Lulus" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker">
+										<input value='@if(count($errors) > 0){{old('tahun_lulus')}}@endif' type="text" name="tahun_lulus" required autocomplete="off" placeholder="Tanggal Lulus" data-date-format="dd-mm-yyyy" data-date-viewmode="years" class="form-control date-picker">
 										<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
 									</div>
+								</div>
+								<div class='form-group @if($errors->has('file')) has-error @endif'>
+									<label class='control-label'>Upload File</label>
+									<div class="input-group">
+										<input type="file" name="file" class="form-control" required>
+									</div>
+
+									@if ($errors->has('file'))
+										<span for="file" class="help-block">{{ $errors->first('file') }}</span>
+									@endif
 								</div>
 							</div>
 						</div>

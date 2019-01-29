@@ -34,6 +34,10 @@
 						<td>Tahun Lulus</td>
 						<td>{{tgl_id($data->tahun_lulus)}}</td>
 					</tr>
+					<tr>
+						<td>File</td>
+						<td><a href="{{asset('upload/pendidikan/'.$data->file)}}" target="_blank">Lihat</a></td>
+					</tr>
 				</tbody>
 			</table>
 		</div>		

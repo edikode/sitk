@@ -18,7 +18,7 @@ class Login extends Controller
 
     function masuk(Request $request){
         
-        $data = Pengguna::where('email',$request->email)->where('status',1)->first();
+        $data = Pengguna::where('username',$request->nip)->where('status',1)->first();
 
         if($data){
             if (Hash::check($request->password, $data->password)) {
@@ -36,16 +36,16 @@ class Login extends Controller
                     return redirect('superuser/home');
 
                 } else {
-                    Session::flash('pesan_error', 'Tidak Terdaftar pada sistem, Masukkan Email dan Password dengan benar !!');
+                    Session::flash('pesan_error', 'Tidak Terdaftar pada sistem, Masukkan Username dan Password dengan benar !!');
                     return redirect('login');
                 }
                 
             } else {
-                Session::flash('pesan_error', 'Password Salah, Masukkan Email dan Password dengan benar !!');
+                Session::flash('pesan_error', 'Password Salah, Masukkan Username dan Password dengan benar !!');
                 return redirect('login');
             }
         } else {
-            Session::flash('pesan_error', 'Tidak Terdaftar pada sistem, Masukkan Email dan Password dengan benar !!');
+            Session::flash('pesan_error', 'Tidak Terdaftar pada sistem, Masukkan Username dan Password dengan benar !!');
             return redirect('login');
         }
         

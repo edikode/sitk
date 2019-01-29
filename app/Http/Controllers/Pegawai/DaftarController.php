@@ -48,7 +48,6 @@ class DaftarController extends Controller
 
         $this->validate($request, [
             'nip'    => 'required|unique:pegawai,nip,'.$pegawai['id'],
-            'email'    => 'required|unique:pegawai,email,'.$pegawai['nip'],
             'password'  => 'required|min:6|same:konfirmasipassword',
         ]);
 
@@ -70,7 +69,7 @@ class DaftarController extends Controller
         if($pegawai->save()){
             $user = new User;
             $user->name = $request->nama;
-            $user->email = $request->email;
+            $user->username = $request->nip;
             $user->level = "pegawai";
             $user->status = false;
             $user->pegawai_id = $pegawai->id;

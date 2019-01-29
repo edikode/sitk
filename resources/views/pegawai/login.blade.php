@@ -7,7 +7,7 @@
 
         <div class="box-login">
             <h3>Login Aplikasi</h3>  
-            <p>Silahkan isi Email & Password anda.</p>
+            <p>Silahkan isi Username & Password anda.</p>
             <form class="form-login" action="{{ route('login.submit') }}" method="post">
                 {{ csrf_field() }}
 
@@ -16,7 +16,7 @@
                 <fieldset>
                     <div class="form-group">
                         <span class="input-icon">
-                            <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}" required autofocus>
+                            <input type="text" class="form-control" name="nip" placeholder="NIP" value="{{ old('nip') }}" required autofocus>
                             <i class="icon-user"></i> 
                         </span>
                     </div>
@@ -24,9 +24,6 @@
                         <span class="input-icon">
                             <input type="password" class="form-control password" name="password" placeholder="Password">
                             <i class="icon-lock"></i>
-                            {{-- <a class="forgot" href="{{ route('admin.password.request') }}">
-                                Lupa Password?
-                            </a> --}}
                         </span>
                     </div>
                     <div class="form-actions"> 

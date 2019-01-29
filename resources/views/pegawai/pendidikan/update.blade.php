@@ -48,6 +48,16 @@
 										<span class="input-group-addon"> <i class="fa fa-calendar"></i> </span>
 									</div>
 								</div>
+								<div class='form-group @if($errors->has('file')) has-error @endif'>
+									<label class='control-label'>Upload File</label>
+									<div class="input-group">
+										<input type="file" name="file" class="form-control" required>
+									</div>
+
+									@if ($errors->has('file'))
+										<span for="file" class="help-block">{{ $errors->first('file') }}</span>
+									@endif
+								</div>
 							</div>
 						</div>
 						<hr>

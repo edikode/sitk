@@ -18,4 +18,10 @@ class Commond
 
         return $parent;
     }
+
+    public function CekData($id){
+        $data = DB::table('users')->select('id')->where('pegawai_id', $id)->where('level', 'admin')->first();
+        
+        return $data;
+    }
 }

@@ -48,6 +48,7 @@
 								<th>Satuan Kerja</th>			
 								<th>Lokasi</th>			
 								<th>Status</th>			
+								<th>File</th>			
 								{{-- <th class="pilihan">Opsi</th> --}}
 							</tr>
 						</thead>
@@ -66,6 +67,7 @@
 									<td>{{$d->satuan_kerja}}</td>
 									<td>{{$d->lokasi}}</td>
 									<td>{{$d->status}}</td>
+									<td>@if($d->file == "") Tidak Ada @else<a href="{{asset('upload/riwayat/'.$d->file)}}" target="_blank">Lihat</a>@endif</td>
 
 									{{-- <td>
 										<a data-original-title='Edit' class='btn btn-sm btn-blue tooltips' href='{{ url('riwayat-kerja/'. $d->id .'/edit')}}'>
@@ -163,7 +165,17 @@
 							@if ($errors->has('lokasi'))
 								<span for="lokasi" class="help-block">{{ $errors->first('lokasi') }}</span>
 							@endif
-						</div>				
+						</div>	
+						<div class='form-group @if($errors->has('file')) has-error @endif'>
+							<label class='control-label'>Upload File</label>
+							<div class="input-group">
+								<input type="file" name="file" class="form-control" required>
+							</div>
+
+							@if ($errors->has('file'))
+								<span for="file" class="help-block">{{ $errors->first('file') }}</span>
+							@endif
+						</div>			
 					</div>
 				</div>
 			</div>

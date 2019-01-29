@@ -78,6 +78,12 @@
 						<span class="selected"></span>					
 					</a>
 				</li>
+				<li class="{{ set_active(['admin/pengguna', Request::is('admin/pengguna/*')]) }}">
+					<a href="{{ url('admin/pengguna') }}"><i class="icon-laptop"></i>
+						<span class="title">Pengguna</span>
+						<span class="selected"></span>					
+					</a>
+				</li>
 				
 
 			@endif

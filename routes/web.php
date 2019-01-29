@@ -30,15 +30,10 @@ Route::group(['prefix' => 'admin'], function ()
     Route::resource('pegawai', 'Admin\PegawaiController');
     Route::resource('lokasi', 'Admin\LokasiController');
     Route::resource('jabatan', 'Admin\JabatanController');
+    Route::resource('pengguna', 'Admin\PenggunaController');
     
 });
 
-// Superuser
-Route::group(['prefix' => 'superuser'], function () 
-{
-	Route::get('/home', 'Superuser\HomeController@index')->name('superuser.home'); 
-
-});
 
 
 

@@ -15,4 +15,10 @@ function ParentKategori($id){
 	return $data;
 }
 
+function CekData($id){
+	$jmldata = new Commond();
+	$data = $jmldata->CekData($id);
+	return count($data);
+}
+
 ?>

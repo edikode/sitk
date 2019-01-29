@@ -35,7 +35,7 @@ class RiwayatController extends Controller
         ->join('lokasi_kerja', 'riwayat_jabatan.lokasi_kerja_id', '=', 'lokasi_kerja.id')
         ->join('jabatan', 'riwayat_jabatan.jabatan_id', '=', 'jabatan.id')
         ->join('pegawai', 'riwayat_jabatan.pegawai_id', '=', 'pegawai.id')
-        ->select('riwayat_jabatan.id','riwayat_jabatan.nomor_sk','riwayat_jabatan.tanggal_sk','riwayat_jabatan.nomor_sk','riwayat_jabatan.tanggal_mulai','riwayat_jabatan.tanggal_selesai','riwayat_jabatan.status','riwayat_jabatan.satuan_kerja','jabatan.nama as nama_jabatan','lokasi_kerja.nama as nama_lokasi','pegawai.nip as nip','pegawai.nama as nama_pegawai')
+        ->select('riwayat_jabatan.id','riwayat_jabatan.file','riwayat_jabatan.nomor_sk','riwayat_jabatan.tanggal_sk','riwayat_jabatan.nomor_sk','riwayat_jabatan.tanggal_mulai','riwayat_jabatan.tanggal_selesai','riwayat_jabatan.status','riwayat_jabatan.satuan_kerja','jabatan.nama as nama_jabatan','lokasi_kerja.nama as nama_lokasi','pegawai.nip as nip','pegawai.nama as nama_pegawai')
         ->orderby('riwayat_jabatan.id','DESC')
         // ->where('riwayat_jabatan.pegawai_id',Auth::user()->id)
         ->get();
@@ -164,6 +164,12 @@ class RiwayatController extends Controller
     public function destroy($id)
     {
         $data = Riwayat::findorfail($id);
+
+        if($data->file != ""){
+            if(file_exists(public_path('upload/riwayat/').$data->file)) {
+                unlink(public_path('upload/riwayat/').$data->file);
+            }
+        }
 
         $data->delete();
         Session::flash('pesan_sukses', 'Data Riwayat Kerja Berhasil Dihapus');

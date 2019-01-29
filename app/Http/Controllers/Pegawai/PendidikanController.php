@@ -50,10 +50,18 @@ class PendidikanController extends Controller
     {
         $data = new Pendidikan;
 
+        $this->validate($request, [
+            'file'    => 'sometimes|max:10000|mimes:doc,docx,pdf'
+        ]);
+
         $data->nama = $request->nama;
         $data->kota = $request->kota;
         $data->tahun_lulus = tgl_en($request->tahun_lulus);
         $data->pegawai_id = $request->pegawai_id;
+
+        if($request->hasFile('file')) {
+            $data->file = $this->UploadFile($request, $request->nama);
+        }
         
         $data->save();
 
@@ -96,10 +104,18 @@ class PendidikanController extends Controller
     {
         $data = Pendidikan::findorfail($id);
 
+        $this->validate($request, [
+            'file'    => 'sometimes|max:10000|mimes:doc,docx,pdf'
+        ]);
+
         $data->nama = $request->nama;
         $data->kota = $request->kota;
         $data->tahun_lulus = tgl_en($request->tahun_lulus);
         $data->pegawai_id = $request->pegawai_id;
+        
+        if($request->hasFile('file')) {
+            $data->file = $this->UploadFile($request, $request->nama);
+        }
         
         $data->save();
 
@@ -117,6 +133,23 @@ class PendidikanController extends Controller
     public function destroy($id)
     {
         
+    }
+
+    private function UploadFile(Request $request, $link)
+    {
+        $file = $request->file('file');
+        $ext    = $file->getClientOriginalExtension();
+        // dd($request);
+        
+        if($request->file('file')->isValid()) {
+
+            $nama_file = $link . ".$ext";
+            $upload_path = public_path('upload/pendidikan');
+            $request->file('file')->move($upload_path, $nama_file);
+            
+            return $nama_file;
+        }
+        return false;
     }
 
 }

@@ -81,6 +81,7 @@
 								<th>Satuan Kerja</th>			
 								<th>Lokasi</th>			
 								<th>Status</th>			
+								<th>File</th>			
 								<th class="pilihan">Opsi</th>
 							</tr>
 						</thead>
@@ -101,6 +102,7 @@
 									<td>{{$d->satuan_kerja}}</td>
 									<td>{{$d->nama_lokasi}}</td>
 									<td>{{$d->status}}</td>
+									<td>@if($d->file == "") Tidak Ada @else<a href="{{asset('upload/riwayat/'.$d->file)}}" target="_blank">Lihat</a>@endif</td>
 
 									<td>
 										

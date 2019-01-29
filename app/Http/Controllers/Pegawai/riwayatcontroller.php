@@ -31,7 +31,7 @@ class RiwayatController extends Controller
         $data = DB::table('riwayat_jabatan')
         ->join('lokasi_kerja', 'riwayat_jabatan.lokasi_kerja_id', '=', 'lokasi_kerja.id')
         ->join('jabatan', 'riwayat_jabatan.jabatan_id', '=', 'jabatan.id')
-        ->select('riwayat_jabatan.id','riwayat_jabatan.pegawai_id','riwayat_jabatan.nomor_sk','riwayat_jabatan.tanggal_sk','riwayat_jabatan.nomor_sk','riwayat_jabatan.tanggal_mulai','riwayat_jabatan.tanggal_selesai','riwayat_jabatan.status','riwayat_jabatan.satuan_kerja','jabatan.nama as jabatan','lokasi_kerja.nama as lokasi')
+        ->select('riwayat_jabatan.id','riwayat_jabatan.file','riwayat_jabatan.pegawai_id','riwayat_jabatan.nomor_sk','riwayat_jabatan.tanggal_sk','riwayat_jabatan.nomor_sk','riwayat_jabatan.tanggal_mulai','riwayat_jabatan.tanggal_selesai','riwayat_jabatan.status','riwayat_jabatan.satuan_kerja','jabatan.nama as jabatan','lokasi_kerja.nama as lokasi')
         ->orderby('riwayat_jabatan.id','DESC')
         ->where('riwayat_jabatan.pegawai_id',Auth::user()->pegawai_id)->get();
         
@@ -60,6 +60,7 @@ class RiwayatController extends Controller
 
         $this->validate($request, [
             'nomor_sk'    => 'required|unique:riwayat_jabatan,nomor_sk,'.$data['id'],
+            'file'    => 'sometimes|max:10000|mimes:doc,docx,pdf'
         ]);
 
         $data->nomor_sk = $request->nomor_sk;
@@ -73,12 +74,33 @@ class RiwayatController extends Controller
         $data->lokasi_kerja_id = $request->lokasi;
         $data->jabatan_id = $request->jabatan;
         $data->pegawai_id = Auth::user()->pegawai_id;
+
+        if($request->hasFile('file')) {
+            $data->file = $this->UploadFile($request, $request->nomor_sk);
+        }
         
         $data->save();
 
         Session::flash('pesan_sukses', 'Data Riwayat Jabatan Berhasil dimasukkan');
 
         return redirect('riwayat-kerja');
+    }
+
+    private function UploadFile(Request $request, $link)
+    {
+        $file = $request->file('file');
+        $ext    = $file->getClientOriginalExtension();
+        // dd($request);
+        
+        if($request->file('file')->isValid()) {
+
+            $nama_file = $link . ".$ext";
+            $upload_path = public_path('upload/riwayat');
+            $request->file('file')->move($upload_path, $nama_file);
+            
+            return $nama_file;
+        }
+        return false;
     }
 
     /**
